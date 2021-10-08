@@ -1,0 +1,30 @@
+.page{
+  padding: 50px;
+
+  .pageTitle{
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .testBox {
+    margin: 50px auto;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > * {
+      margin: 10px;
+    }
+    .input{
+      width: 250px;
+    }
+    .btn{
+      height: 30px;
+    }
+
+    .select{
+    }
+  }
+}
+
