@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/project-front-end/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/project-front-end/static/js/main.eb2e047e.chunk.js",
-    "main.js.map": "/project-front-end/static/js/main.eb2e047e.chunk.js.map",
-    "runtime-main.js": "/project-front-end/static/js/runtime-main.af117400.js",
-    "runtime-main.js.map": "/project-front-end/static/js/runtime-main.af117400.js.map",
-    "static/js/2.dd1678e4.chunk.js": "/project-front-end/static/js/2.dd1678e4.chunk.js",
-    "static/js/2.dd1678e4.chunk.js.map": "/project-front-end/static/js/2.dd1678e4.chunk.js.map",
-    "static/js/3.7997ba4a.chunk.js": "/project-front-end/static/js/3.7997ba4a.chunk.js",
-    "static/js/3.7997ba4a.chunk.js.map": "/project-front-end/static/js/3.7997ba4a.chunk.js.map",
+    "main.css": "/project-front-end/static/css/main.a5f28893.chunk.css",
+    "main.js": "/project-front-end/static/js/main.81c6fad4.chunk.js",
+    "main.js.map": "/project-front-end/static/js/main.81c6fad4.chunk.js.map",
+    "runtime-main.js": "/project-front-end/static/js/runtime-main.64a15509.js",
+    "runtime-main.js.map": "/project-front-end/static/js/runtime-main.64a15509.js.map",
+    "static/js/2.21c30a01.chunk.js": "/project-front-end/static/js/2.21c30a01.chunk.js",
+    "static/js/2.21c30a01.chunk.js.map": "/project-front-end/static/js/2.21c30a01.chunk.js.map",
+    "static/js/3.99feea8c.chunk.js": "/project-front-end/static/js/3.99feea8c.chunk.js",
+    "static/js/3.99feea8c.chunk.js.map": "/project-front-end/static/js/3.99feea8c.chunk.js.map",
     "index.html": "/project-front-end/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/project-front-end/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.dd1678e4.chunk.js.LICENSE.txt": "/project-front-end/static/js/2.dd1678e4.chunk.js.LICENSE.txt"
+    "static/css/main.a5f28893.chunk.css.map": "/project-front-end/static/css/main.a5f28893.chunk.css.map",
+    "static/js/2.21c30a01.chunk.js.LICENSE.txt": "/project-front-end/static/js/2.21c30a01.chunk.js.LICENSE.txt",
+    "static/media/ErrorPage.module.scss": "/project-front-end/static/media/errorPage.ddfdec48.jpeg",
+    "static/media/App.scss": "/project-front-end/static/media/spacedog.b46f1e1d.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.af117400.js",
-    "static/js/2.dd1678e4.chunk.js",
-    "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.eb2e047e.chunk.js"
+    "static/js/runtime-main.64a15509.js",
+    "static/js/2.21c30a01.chunk.js",
+    "static/css/main.a5f28893.chunk.css",
+    "static/js/main.81c6fad4.chunk.js"
   ]
 }
