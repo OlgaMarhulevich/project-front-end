@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import s from './Test.module.scss'
-import {Button} from "../../components/button/Button";
-import {InputText} from "../../components/inputText/InputText";
-import {Checkbox} from "../../components/checkbox/Checkbox";
-import {EditableSpan} from "../../components/editableSpan/EditableSpan";
-import {Select} from "../../components/select/Select";
-import {Radio} from "../../components/radioButton/Radio";
-import {Range} from "../../components/range/Range";
+import {Button} from "../../common/components/button/Button";
+import {InputText} from "../../common/components/inputText/InputText";
+import {Checkbox} from "../../common/components/checkbox/Checkbox";
+import {EditableSpan} from "../../common/components/editableSpan/EditableSpan";
+import {Select} from "../../common/components/select/Select";
+import {Radio} from "../../common/components/radioButton/Radio";
+import {Range} from "../../common/components/range/Range";
 
-const SuperInputText: React.FC = () => {
+export const Test: React.FC = () => {
     const [textSpan, setTextSpan] = useState<string>('Double click to edit')
     const [valueForRadio, setValueForRadio] = useState<string>('')
 
@@ -46,5 +46,3 @@ const SuperInputText: React.FC = () => {
         </div>
     )
 }
-
-export default SuperInputText

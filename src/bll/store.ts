@@ -1,0 +1,23 @@
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunk, {ThunkAction} from "redux-thunk";
+import profileReducer from "./reducers/profileReducer";
+import loginReducer from "./reducers/loginReducer";
+import registrationReducer from "./reducers/registrationReducer";
+
+const reducers = combineReducers({
+    profile: profileReducer,
+    login: loginReducer,
+    registration: registrationReducer,
+})
+
+const store = createStore(reducers, applyMiddleware(thunk));
+
+export type AppStateType = ReturnType<typeof reducers>
+export type AppActionsType = any
+
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionsType>
+
+// @ts-ignore
+window.state= store.getState()
+
+export default store;
