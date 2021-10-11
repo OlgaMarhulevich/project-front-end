@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export const ErrorPage: React.FC = () => {
     return (
         <div className={s.page}>
-            <NavLink to={'/test'}><Button value={'GO BACK HOME'} className={s.btn}/></NavLink>
+            <NavLink to={'/'}><Button value={'GO BACK HOME'} className={s.btn}/></NavLink>
         </div>
     )
 }
