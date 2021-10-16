@@ -3,11 +3,15 @@ import thunk, {ThunkAction} from "redux-thunk";
 import profileReducer from "./reducers/profileReducer";
 import loginReducer from "./reducers/loginReducer";
 import registrationReducer from "./reducers/registrationReducer";
+import setPasswordReducer from "./reducers/setPasswordReducer";
+import passwordRecoveryReducer from "./reducers/passwordRecoveryReducer";
 
 const reducers = combineReducers({
     profile: profileReducer,
     login: loginReducer,
     registration: registrationReducer,
+    setPassword: setPasswordReducer,
+    passwordRecovery: passwordRecoveryReducer,
 })
 
 const store = createStore(reducers, applyMiddleware(thunk));
