@@ -18,6 +18,6 @@ export type AppActionsType = any
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionsType>
 
 // @ts-ignore
-window.state= store.getState()
+window.store= store
 
 export default store;
