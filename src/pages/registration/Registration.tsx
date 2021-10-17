@@ -60,7 +60,7 @@ export const Registration: React.FC = () => {
 
             <div>
                 <NavLink to={'/'}><Button red value={'Cancel'} className={s.btn}/></NavLink>
-                <Button onClick={submit} value={'Register'} className={s.btn}/>
+                <Button onClick={submit} value={'Register'}/>
             </div>
         </div>
     )
