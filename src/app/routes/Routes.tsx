@@ -15,7 +15,9 @@ export const Routes = () => {
             <Route exact path={'/'} render={() => <Home/> }/>
             <Route path={'/test'} render={() => <Test/> }/>
             <Route path={'/login'} render={() => <Login/>}/>
-            <Route path={'/profile'} render={() => <Profile/>}/>
+            <Route path={'/profile'} render={() => <Profile email={'qweqwe@wsfs.com'}
+            name={'Jdjfjk KKjkdfjf'}
+            />}/>
             <Route path={'/registration'} render={() => <Registration/>}/>
             <Route path={'/password-recovery'} render={() => <PasswordRecovery/>}/>
             <Route path={'/set-password'} render={() => <SetPassword/>}/>
