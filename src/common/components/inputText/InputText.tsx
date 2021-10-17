@@ -38,7 +38,7 @@ export const InputText: React.FC<InputTextPropsType> = (
         <div className={s.divInput}>
             <span className={`${s.label} ${labelClassName || ''}`}>{label}</span>
             <input
-                type={'text'}
+                type={type||'text'}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
                 className={finalInputClassName}

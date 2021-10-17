@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {saveEmail, showModalWindow} from "../../../bll/reducers/setPasswordReducer";
+import {saveEmail, sendInstructionTC, showModalWindow} from "../../../bll/reducers/setPasswordReducer";
 import s from "./ForgotPassword.module.scss";
 import {AppStateType} from "../../../bll/store";
 
@@ -18,7 +18,8 @@ export const ForgotPassword: React.FC = () => {
 
     const sendInstruction = () => {
         dispatch(showModalWindow(true));
-        email && dispatch(saveEmail(email));
+        //путь должен быть другим!
+        email && dispatch(saveEmail(email)) && dispatch(sendInstructionTC(email,'http://localhost:3000/project-front-end#/set-password'));
     }
 
     return (
@@ -26,7 +27,7 @@ export const ForgotPassword: React.FC = () => {
             <div className={s.pageTitle}>Forgot your password?</div>
             <div>
                 <p>Enter your email address and we will send you further instructions</p>
-                <input onChange={emailHandler} name={"Email"} type="text"/>
+                <input value={email} onChange={emailHandler} name={"Email"} type="text"/>
                 <div>
                     <button onClick={sendInstruction}>Send instructions</button>
                 </div>
