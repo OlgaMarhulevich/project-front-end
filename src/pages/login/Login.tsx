@@ -6,7 +6,6 @@ import {Button} from "../../common/components/button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../bll/reducers/loginReducer";
 import {AppStateType} from "../../bll/store";
-import {LoginParamsType} from "../../dal/LoginAPI";
 import {Redirect} from "react-router-dom";
 
 

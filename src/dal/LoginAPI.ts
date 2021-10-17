@@ -16,7 +16,6 @@ export const authAPI = {
     }
 }
 
-
 // types
 export type ProfileType = {
     _id: string

@@ -1,14 +1,17 @@
 import {authAPI, LoginParamsType} from "../../dal/LoginAPI";
 import {Dispatch} from "redux";
 
-type initialLoginStateType = typeof initialLoginState
+type initialLoginStateType = {
+    // происходит ли сейчас взаимодействие с сервером
+    logoutStatus: RequestStatusType
+    // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
+    loginError: string | null
+    isLoggedIn: boolean
+}
 
-type ErrorType = null | string
-
-
-const initialLoginState = {
+const initialLoginState: initialLoginStateType = {
     isLoggedIn: false,
-    loginError: null as ErrorType,
+    loginError: null,
     logoutStatus: 'idle'
 }
 
@@ -59,6 +62,30 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionLogi
         })
     // .finally(() => {
     //     dispatch(setLoginStatusAC('succeeded'))
+    // })
+}
+
+
+export const logoutTC = () => (dispatch: Dispatch<ActionLoginReducerType>) => {
+
+    dispatch(setLogoutStatusAC('loading'))
+
+    authAPI.logout()
+
+        .then(() => {
+            dispatch(setIsLoggedInAC(false))
+        })
+
+        .catch(err => {
+            const error = err.response
+                ? err.response.data.error
+                : (err.message + ', more details in the console');
+            // dispatch(signInErrorAC(error))
+            // const errData = JSON.stringify(err.response.data.error)
+            // alert(errData)
+        })
+    // .finally(() => {
+    //     dispatch(setLogoutStatusAC('succeeded'))
     // })
 }
 
