@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
 import { Test } from '../../pages/test/Test';
 import {ErrorPage} from "../../pages/404/ErrorPage";
-import {EnterNewPassword} from "../../pages/enter-new-password/EnterNewPassword";
+import {SetPassword} from "../../pages/set-password/setPassword";
 import {Registration} from "../../pages/registration/Registration";
 import {Login} from "../../pages/login/Login";
 import {Profile} from "../../pages/profile/Profile";
@@ -18,7 +18,7 @@ export const Routes = () => {
             <Route path={'/profile'} render={() => <Profile/>}/>
             <Route path={'/registration'} render={() => <Registration/>}/>
             <Route path={'/password-recovery'} render={() => <PasswordRecovery/>}/>
-            <Route path={'/enter-new-password'} render={() => <EnterNewPassword/>}/>
+            <Route path={'/set-password'} render={() => <SetPassword/>}/>
             <Route path={'/404'} render={() => <ErrorPage/> }/>
             <Redirect from={ '*' } to={'/404'}/>
         </Switch>

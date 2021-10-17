@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
             <NavLink to={'/profile'}><Button value={'profile'} className={s.btn}/></NavLink>
             <NavLink to={'/registration'}><Button value={'registration'} className={s.btn}/></NavLink>
             <NavLink to={'/password-recovery'}><Button value={'password-recovery'} className={s.btn}/></NavLink>
-            <NavLink to={'/enter-new-password'}><Button value={'enter-new-password'} className={s.btn}/></NavLink>
+            <NavLink to={'/set-password'}><Button value={'set-password'} className={s.btn}/></NavLink>
             <NavLink to={'/404'}><Button value={'404'} className={s.btn}/></NavLink>
         </div>
     )
