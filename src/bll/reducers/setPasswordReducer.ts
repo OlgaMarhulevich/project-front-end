@@ -1,6 +1,7 @@
 //1 типизация
 import {Dispatch} from "redux";
 import {forgotPasswordAPI} from "../../dal/setPasswordAPI";
+import {log} from "util";
 
 type setPasswordStateType = {
     email: string,
@@ -43,15 +44,25 @@ export type ActionSetPasswordReducerType = ReturnType<typeof saveEmail>
 
 //6 саночки
 
-export const sendInstructionTC=(email:string,ghPagesAddress:string)=>{
-    return (dispatch: Dispatch)=>{
-
-    }}
-
-export const createPasswordTC = (newPassword: string,token:string) => {
+export const sendInstructionTC = (email: string, ghPagesAddress: string) => {
     return (dispatch: Dispatch) => {
-     /*   forgotPasswordAPI.setNewPassword(newPassword)
-            .then*/
+        forgotPasswordAPI.forgot({email, message: ghPagesAddress})
+            .then((response) => {
+                debugger;
+                console.log(response.data.info)
+
+            })
+            .catch((response) => {
+                debugger;
+                console.log(response.data.error)
+            })
+    }
+}
+
+export const createPasswordTC = (newPassword: string, token: string) => {
+    return (dispatch: Dispatch) => {
+        /*   forgotPasswordAPI.setNewPassword(newPassword)
+               .then*/
     }
 }
 

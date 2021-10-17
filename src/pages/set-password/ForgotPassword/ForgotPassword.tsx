@@ -19,7 +19,8 @@ export const ForgotPassword: React.FC = () => {
     const sendInstruction = () => {
         dispatch(showModalWindow(true));
         //путь должен быть другим!
-        email && dispatch(saveEmail(email)) && dispatch(sendInstructionTC(email,'http://localhost:3000/project-front-end#/set-password'));
+        //
+        email && dispatch(saveEmail(email)) && dispatch(sendInstructionTC(email,'http://localhost:3000/project-front-end#/password-recovery/'));
     }
 
     return (
