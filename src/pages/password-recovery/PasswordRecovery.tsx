@@ -1,25 +1,25 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './PasswordRecovery.module.scss'
 import {useDispatch} from "react-redux";
-import {useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
+import {createPasswordTC} from "../../bll/reducers/setPasswordReducer";
 
-//here
 export const PasswordRecovery: React.FC = () => {
     const dispatch = useDispatch();
-
-    const [password, setPassword] = useState<string | undefined>();
+    const [password, setPassword] = useState<string>("");
 
 
     const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.currentTarget.value);
     }
-    const { token } = useParams<{token: string}>();
-    console.log(token)
+    const {token} = useParams<{ token: string }>();
+    const test = useParams();
+    console.log('test', test)
 
     const sendInstruction = () => {
-        //если пароль не пустое место, то диспатчим саночку
-        // password && dispatch(createPasswordTC(password));
+        dispatch(createPasswordTC(password, token));
     }
+
 
     return (
         <div className={s.page}>

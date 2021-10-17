@@ -1,19 +1,25 @@
 import axios from "axios";
 
-const instance = axios.create({
+const instanceHeroku = axios.create({
     baseURL: "https://neko-back.herokuapp.com/2.0/",
 })
-
+const instanceLocal = axios.create({
+    baseURL: "http://localhost:7542/2.0/",
+})
 export const forgotPasswordAPI = {
     forgot(data: ForgotPasswordType) {
-        return instance.post<ForgotPasswordType, ForgotPasswordResponseType>('auth/forgot', {
+        return instanceHeroku.post<ForgotPasswordType, ForgotPasswordResponseType>('auth/forgot', {
             email: data.email,
             from: "test-front-admin <ai73a@yandex.by>",
-            message: `<div style="background-color: lime; padding: 15px">password recovery link:<a href='${data.message}'>link</a></div>`,
+            message: `<div style="background-color: lime; padding: 15px">password recovery link:<a href='${data.message}/$token$'>link</a></div>`,
         })
     },
-    setNewPassword(data: NewPasswordRequestType) {//{password,resetPasswordToken}
-        return instance.post<NewPasswordRequestType, NewPasswordResponseType>('auth/set-new-password', data)
+
+    setNewPassword(data: NewPasswordRequestType) {
+        return instanceLocal.post<NewPasswordRequestType,NewPasswordResponseType>('auth/set-new-password', {
+            password: data.password,
+            resetPasswordToken:data.resetPasswordToken,
+        })
     }
 }
 
@@ -21,7 +27,7 @@ export const forgotPasswordAPI = {
 //тип отправляемый на сервер
 
 export type ForgotPasswordType = {
-    email: string, //"nya@nya.nya"
+    email: string,
     // from: string,"test-front-admin <ai73a@yandex.by>",  можно указать разработчика фронта)
     message: string,
     //`<div style="background-color: lime; padding: 15px">password recovery link:<a href='http://localhost:3000/#/set-new-password/$token$'>link</a></div>`
@@ -32,7 +38,7 @@ export type ForgotPasswordType = {
 export type ForgotPasswordResponseType = {
     data:
         {
-            info: string,//"sent —ฅ/ᐠ.̫ .ᐟ\ฅ—"
+            info: string,
             error: string,
         }
 }
@@ -45,7 +51,9 @@ export type NewPasswordRequestType = {
 }
 //тип приходящий с сервера
 export type NewPasswordResponseType = {
-    info: string,//"setNewPassword success —ฅ/ᐠ.̫ .ᐟ\ฅ—"
-    error: string;
+    data: {
+        info: string,
+        error: string;
+    },
 }
 
