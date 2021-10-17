@@ -46,8 +46,8 @@ export type ForgotPasswordResponseType = {
 //setNewPassword
 //тип отправляемый на сервер
 export type NewPasswordRequestType = {
-    password: string,// "some-new-pass"
-    resetPasswordToken: string,//"some-token-from-url"
+    password: string,
+    resetPasswordToken: string,
 }
 //тип приходящий с сервера
 export type NewPasswordResponseType = {
@@ -55,5 +55,6 @@ export type NewPasswordResponseType = {
         info: string,
         error: string;
     },
+    status:number,
 }
 
