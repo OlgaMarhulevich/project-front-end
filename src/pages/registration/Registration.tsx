@@ -36,7 +36,7 @@ export const Registration: React.FC = () => {
             <div className={s.page}>
                 <div className={s.pageTitle}>Sign up</div>
 
-                {error && <div className={s.error}>{error}</div>}
+                <div style={{height: '1em'}} className={s.error}>{error}</div>
 
                 <InputText
                     onChange={(e) => setEmail(e.currentTarget.value)}

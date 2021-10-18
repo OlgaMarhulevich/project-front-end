@@ -41,13 +41,12 @@ export const PasswordRecovery: React.FC = () => {
                         onChange={passwordHandler}
                         type={"password"}
                         name={"password"}/>
-                    <p>{errorPasswordState}</p>
                 </div>
+                <p style={{height: '1em', color: '#de2e2e'}}>{errorPasswordState}</p>
 
                 <div>
                     <Button value={"Confirm new password"} onClick={sendInstruction}/>
                 </div>
-                <p>Create new password and we will send you further instructions to email</p>
 
                 {loadingState && <Preloader/>}
 

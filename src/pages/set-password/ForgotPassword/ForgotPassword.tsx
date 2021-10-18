@@ -6,7 +6,7 @@ import {AppStateType} from "../../../bll/store";
 import {InputText} from "../../../common/components/inputText/InputText";
 import {Button} from "../../../common/components/button/Button";
 import {Preloader} from "../../../common/components/preloader/Preloader";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {ROUTES} from "../../../app/routes/Routes";
 
 export const ForgotPassword: React.FC = () => {
@@ -40,14 +40,14 @@ export const ForgotPassword: React.FC = () => {
                                onChange={emailHandler}
                                type={"text"}
                                name={"email"}/>
-                    <p style={{color: '#de2e2e'}}>{errorEmailState}</p>
                 </div>
+                <p style={{height: '1em', color: '#de2e2e'}}>{errorEmailState}</p>
                 <div>
                     <Button value={"Send instructions"} onClick={sendInstruction}/>
                 </div>
                 <p>Did you remember your password?</p>
                 <NavLink to={ROUTES.LOGIN}>Try to log in</NavLink>
-                {loadingState &&  <Preloader/>}
+                {loadingState && <Preloader/>}
             </div>
         </div>
     )

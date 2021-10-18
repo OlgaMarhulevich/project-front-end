@@ -8,6 +8,7 @@ import {loginTC} from "../../bll/reducers/loginReducer";
 import {AppStateType} from "../../bll/store";
 import {NavLink, Redirect} from "react-router-dom";
 import {ROUTES} from "../../app/routes/Routes";
+import {Preloader} from "../../common/components/preloader/Preloader";
 
 
 export const Login: React.FC = () => {
@@ -17,6 +18,7 @@ export const Login: React.FC = () => {
 
     const isLoggedIn = useSelector<AppStateType>(state => state.login.isLoggedIn)
     const error = useSelector((state:AppStateType) => state.login.loginError)
+    const isLoading = useSelector((state:AppStateType) => state.login.isLoading)
 
     const dispatch = useDispatch()
     const loginHandler = () => {
@@ -31,7 +33,7 @@ export const Login: React.FC = () => {
         <div className={s.page}>
             <div className={s.pageTitle}>Log In</div>
 
-            {error && <div className={s.error}>{error}</div>}
+            <div style={{height: '1em'}} className={s.error}>{error}</div>
 
             <InputText label={'Email'} error={''} className={s.input} value={email}
                        onChange={(e) => setEmail(e.currentTarget.value)}/>
@@ -49,6 +51,8 @@ export const Login: React.FC = () => {
                 <NavLink className={s.link} to={ROUTES.SET_PASSWORD}>Forgot your password?</NavLink>
                 <NavLink className={s.link} to={ROUTES.REGISTRATION}>Sign up</NavLink>
             </div>
+
+            {isLoading && <Preloader/>}
         </div>
     )
 }

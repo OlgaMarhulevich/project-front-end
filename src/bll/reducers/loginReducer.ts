@@ -8,12 +8,14 @@ type initialLoginStateType = {
     // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
     loginError: string
     isLoggedIn: boolean
+    isLoading: boolean
 }
 
 const initialLoginState: initialLoginStateType = {
     isLoggedIn: false,
     loginError: '',
     logoutStatus: 'idle',
+    isLoading: false
 }
 
 const loginReducer = (state: initialLoginStateType = initialLoginState, action: ActionLoginReducerType): initialLoginStateType => {
@@ -33,6 +35,11 @@ const loginReducer = (state: initialLoginStateType = initialLoginState, action: 
                 ...state,
                 logoutStatus: action.status
             }
+        case "LOGIN/SET-LOADING":
+            return {
+                ...state,
+                isLoading: action.value
+            }
         default:
             return state;
     }
@@ -42,11 +49,14 @@ const loginReducer = (state: initialLoginStateType = initialLoginState, action: 
 export const setIsLoggedInAC = (value: boolean) => ({type: "LOGIN/SET-IS-LOGGED-IN", value} as const)
 export const setErrorAC = (error: string) => ({type: "LOGIN/SET-IN-ERROR", error} as const)
 export const setLogoutStatusAC = (status: RequestStatusType) => ({type: "LOGIN/SET-LOGOUT-STATUS", status} as const)
+export const setLoadingAC = (value: boolean) => ({type: "LOGIN/SET-LOADING", value} as const)
 
 
 //thunk
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionLoginReducerType>) => {
     // dispatch(setAppStatusAC('loading'))
+    dispatch(setLoadingAC(true))
+
     authAPI.login(data)
         .then(res => {
             dispatch(setIsLoggedInAC(true))
@@ -62,15 +72,17 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionLogi
             dispatch(setErrorAC(error))
             //const errData = JSON.stringify(err.response.data.error)
         })
-    // .finally(() => {
-    //     dispatch(setLoginStatusAC('succeeded'))
-    // })
+    .finally(() => {
+        //dispatch(setLoginStatusAC('succeeded'))
+        dispatch(setLoadingAC(false))
+    })
 }
 
 
 export const logoutTC = () => (dispatch: Dispatch<ActionLoginReducerType>) => {
 
     dispatch(setLogoutStatusAC('loading'))
+    dispatch(setLoadingAC(true))
 
     authAPI.logout()
 
@@ -88,6 +100,7 @@ export const logoutTC = () => (dispatch: Dispatch<ActionLoginReducerType>) => {
         })
         .finally(() => {
             dispatch(setLogoutStatusAC('succeeded'))
+            dispatch(setLoadingAC(false))
         })
 }
 
@@ -102,6 +115,6 @@ export type ActionLoginReducerType =
     | ReturnType<typeof setAvatarAC>
     | ReturnType<typeof setEmailAC>
     | ReturnType<typeof setNameAC>
-
+    | ReturnType<typeof setLoadingAC>
 
 export default loginReducer;
