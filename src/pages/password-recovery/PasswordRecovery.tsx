@@ -20,6 +20,7 @@ export const PasswordRecovery: React.FC = () => {
         setPassword(e.currentTarget.value);
     }
     const {token} = useParams<{ token: string }>();
+    console.log(token)
 
     const sendInstruction = () => {
         dispatch(createPasswordTC(password, token));
