@@ -13,7 +13,10 @@ export const authAPI = {
     },
     logout() {
         return instance.delete('auth/me');
-    }
+    },
+    authMe() {
+        return instance.post<{}, {data: ProfileType}>('auth/me', {})
+    },
 }
 
 // types

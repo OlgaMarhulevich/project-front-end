@@ -1,20 +1,31 @@
 import React from "react";
 import s from './Profile.module.scss'
 import unknown from '../../common/assets/images/unknown.png'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
-import {Logout} from "../../common/components/logout/logout";
+import {Redirect} from "react-router-dom";
+import {ROUTES} from "../../app/routes/Routes";
+import {Button} from "../../common/components/button/Button";
+import {logoutTC} from "../../bll/reducers/loginReducer";
 
 export const Profile: React.FC = () => {
-    const name = useSelector((state: AppStateType) => state.login.name)
-    const email = useSelector((state: AppStateType) => state.login.email)
-    const avatar = useSelector((state: AppStateType) => state.login.avatar)
+    const name = useSelector((state: AppStateType) => state.profile.name)
+    const email = useSelector((state: AppStateType) => state.profile.email)
+    const avatar = useSelector((state: AppStateType) => state.profile.avatar)
+
+    const isLoggedIn = useSelector((state: AppStateType) => state.login.isLoggedIn)
+
+    const dispatch = useDispatch()
+
+    if (!isLoggedIn) {
+        return <Redirect to={ROUTES.LOGIN}/>
+    }
 
     return (
         <div className={s.page}>
             <div className={s.pageTitle}>Profile</div>
             <div className={s.logout}>
-                <Logout/>
+                {isLoggedIn && <Button red value={'logout'} onClick={() => dispatch(logoutTC())}/>}
             </div>
             <div className={s.profile}>
                 <img className={s.img} src={avatar || unknown} alt="avatar"/>

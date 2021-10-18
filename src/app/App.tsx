@@ -4,10 +4,10 @@ import s from './App.module.scss'
 import {Header} from "./header/Header";
 
 export const App = () => {
-  return (
-    <div className={s.app}>
-        <Header/>
-        <Routes/>
-    </div>
-  );
+    return (
+        <div className={s.app}>
+            <Header/>
+            <Routes/>
+        </div>
+    );
 }

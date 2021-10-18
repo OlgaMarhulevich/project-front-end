@@ -16,6 +16,8 @@ export const Login: React.FC = () => {
     const [rememberMe, setRememberMe] = useState(false)
 
     const isLoggedIn = useSelector<AppStateType>(state => state.login.isLoggedIn)
+    const error = useSelector((state:AppStateType) => state.login.loginError)
+
     const dispatch = useDispatch()
     const loginHandler = () => {
         dispatch(loginTC({email, password, rememberMe}))
@@ -28,6 +30,8 @@ export const Login: React.FC = () => {
     return (
         <div className={s.page}>
             <div className={s.pageTitle}>Log In</div>
+
+            {error && <div className={s.error}>{error}</div>}
 
             <InputText label={'Email'} error={''} className={s.input} value={email}
                        onChange={(e) => setEmail(e.currentTarget.value)}/>

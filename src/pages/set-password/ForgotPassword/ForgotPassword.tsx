@@ -40,7 +40,7 @@ export const ForgotPassword: React.FC = () => {
                                onChange={emailHandler}
                                type={"text"}
                                name={"email"}/>
-                    <p>{errorEmailState}</p>
+                    <p style={{color: '#de2e2e'}}>{errorEmailState}</p>
                 </div>
                 <div>
                     <Button value={"Send instructions"} onClick={sendInstruction}/>

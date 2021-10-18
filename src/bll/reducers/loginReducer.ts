@@ -1,24 +1,19 @@
 import {authAPI, LoginParamsType} from "../../dal/LoginAPI";
 import {Dispatch} from "redux";
+import {setAvatarAC, setEmailAC, setNameAC} from "./profileReducer";
 
 type initialLoginStateType = {
     // происходит ли сейчас взаимодействие с сервером
     logoutStatus: RequestStatusType
     // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
-    loginError: string | null
+    loginError: string
     isLoggedIn: boolean
-    email: string
-    name: string
-    avatar: string
 }
 
 const initialLoginState: initialLoginStateType = {
     isLoggedIn: false,
-    loginError: null,
+    loginError: '',
     logoutStatus: 'idle',
-    email: '',
-    name: '',
-    avatar: '',
 }
 
 const loginReducer = (state: initialLoginStateType = initialLoginState, action: ActionLoginReducerType): initialLoginStateType => {
@@ -38,21 +33,6 @@ const loginReducer = (state: initialLoginStateType = initialLoginState, action: 
                 ...state,
                 logoutStatus: action.status
             }
-        case "LOGIN/SET-AVATAR":
-            return {
-                ...state,
-                avatar: action.value
-            }
-        case "LOGIN/SET-NAME":
-            return {
-                ...state,
-                name: action.value
-            }
-        case "LOGIN/SET-EMAIL":
-            return {
-                ...state,
-                email: action.value
-            }
         default:
             return state;
     }
@@ -60,18 +40,15 @@ const loginReducer = (state: initialLoginStateType = initialLoginState, action: 
 
 // actions
 export const setIsLoggedInAC = (value: boolean) => ({type: "LOGIN/SET-IS-LOGGED-IN", value} as const)
-export const signInErrorAC = (error: string) => ({type: "LOGIN/SET-IN-ERROR", error} as const)
+export const setErrorAC = (error: string) => ({type: "LOGIN/SET-IN-ERROR", error} as const)
 export const setLogoutStatusAC = (status: RequestStatusType) => ({type: "LOGIN/SET-LOGOUT-STATUS", status} as const)
-export const setNameAC = (value: string) => ({type: "LOGIN/SET-NAME", value} as const)
-export const setEmailAC = (value: string) => ({type: "LOGIN/SET-EMAIL", value} as const)
-export const setAvatarAC = (value: string) => ({type: "LOGIN/SET-AVATAR", value} as const)
+
 
 //thunk
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionLoginReducerType>) => {
     // dispatch(setAppStatusAC('loading'))
     authAPI.login(data)
         .then(res => {
-            alert('Hello ' + res.data.name)
             dispatch(setIsLoggedInAC(true))
             dispatch(setEmailAC(res.data.email))
             dispatch(setAvatarAC(res.data.avatar || ''))
@@ -82,9 +59,8 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionLogi
             const error = err.response
                 ? err.response.data.error
                 : (err.message + `, more details in the console`);
-            dispatch(signInErrorAC(error))
-            const errData = JSON.stringify(err.response.data.error)
-            alert(errData)
+            dispatch(setErrorAC(error))
+            //const errData = JSON.stringify(err.response.data.error)
         })
     // .finally(() => {
     //     dispatch(setLoginStatusAC('succeeded'))
@@ -121,7 +97,7 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed' //э
 
 export type ActionLoginReducerType =
     ReturnType<typeof setIsLoggedInAC>
-    | ReturnType<typeof signInErrorAC>
+    | ReturnType<typeof setErrorAC>
     | ReturnType<typeof setLogoutStatusAC>
     | ReturnType<typeof setAvatarAC>
     | ReturnType<typeof setEmailAC>

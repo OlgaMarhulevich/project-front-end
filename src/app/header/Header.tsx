@@ -3,8 +3,12 @@ import {NavLink} from "react-router-dom";
 import {Button} from "../../common/components/button/Button";
 import { ROUTES } from '../routes/Routes';
 import s from './Header.module.scss'
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../bll/store";
 
 export const Header = () => {
+    const isLoggedIn = useSelector((state: AppStateType) => state.login.isLoggedIn)
+
     return (
         <div className={s.header}>
             <div>
@@ -15,8 +19,8 @@ export const Header = () => {
                 <NavLink to={ROUTES.PROFILE}><Button value={'Profile'} className={s.btn}/></NavLink>
             </div>
             <div>
-                <NavLink to={ROUTES.LOGIN}><Button value={'Log In'} className={s.btn}/></NavLink>
-                <NavLink to={ROUTES.REGISTRATION}><Button value={'Sign Up'} className={s.btn}/></NavLink>
+                <NavLink style={{opacity: isLoggedIn ? '0' : '1'}} to={ROUTES.LOGIN}><Button value={'Log In'} className={s.btn}/></NavLink>
+                <NavLink style={{opacity: isLoggedIn ? '0' : '1'}} to={ROUTES.REGISTRATION}><Button value={'Sign Up'} className={s.btn}/></NavLink>
             </div>
         </div>
     )

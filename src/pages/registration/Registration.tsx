@@ -7,7 +7,7 @@ import {register, setError} from "../../bll/reducers/registrationReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
 import {ROUTES} from "../../app/routes/Routes";
-import preloader from "../../common/assets/images/preloader.gif";
+import {Preloader} from "../../common/components/preloader/Preloader";
 
 export const Registration: React.FC = () => {
     const [email, setEmail] = useState('')
@@ -36,9 +36,7 @@ export const Registration: React.FC = () => {
             <div className={s.page}>
                 <div className={s.pageTitle}>Sign up</div>
 
-                <div className={s.error}>
-                    {error}
-                </div>
+                {error && <div className={s.error}>{error}</div>}
 
                 <InputText
                     onChange={(e) => setEmail(e.currentTarget.value)}
@@ -62,7 +60,7 @@ export const Registration: React.FC = () => {
                     <Button onClick={submit} value={'Register'} disabled={isLoading}/>
                 </div>
 
-                {isLoading && <img alt={'loading...'} style={{width: '100px', margin: '10px'}} src={preloader}/>}
+                {isLoading && <Preloader/>}
             </div>
         </>
 
