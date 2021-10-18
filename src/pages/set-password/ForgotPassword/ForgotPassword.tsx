@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {saveEmail, sendInstructionTC, showModalWindow} from "../../../bll/reducers/setPasswordReducer";
+import {sendInstructionTC} from "../../../bll/reducers/setPasswordReducer";
 import s from "./ForgotPassword.module.scss";
 import {AppStateType} from "../../../bll/store";
 import {InputText} from "../../../common/components/inputText/InputText";
@@ -10,7 +10,8 @@ export const ForgotPassword: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const emailState = useSelector<AppStateType, string >(state => state.setPassword.email);
+    const emailState = useSelector<AppStateType, string>(state => state.setPassword.email);
+    const errorEmailState = useSelector<AppStateType, string>(state => state.setPassword.errorEmail);
 
     const [email, setEmail] = useState<string>(emailState);
 
@@ -20,18 +21,23 @@ export const ForgotPassword: React.FC = () => {
     }
 
     const sendInstruction = () => {
-        dispatch(showModalWindow(true));
-        dispatch(saveEmail(email));
         //тут можно сделать красивей
-        dispatch(sendInstructionTC(email,'http://localhost:3000/project-front-end#/password-recovery'));
+        dispatch(sendInstructionTC(email, 'http://localhost:3000/project-front-end#/password-recovery'));
     }
 
     return (
         <div className={s.page}>
             <div className={s.pageTitle}>Forgot your password?</div>
-            <div>
+            <div className={s.mainBlock}>
                 <p>Enter your email address and we will send you further instructions</p>
-                <InputText label={"Email"} value={email} onChange={emailHandler} type={"text"} name={"email"}/>
+                <div className={s.input}>
+                    <InputText label={"Email"}
+                               value={email}
+                               onChange={emailHandler}
+                               type={"text"}
+                               name={"email"}/>
+                    <p>{errorEmailState}</p>
+                </div>
                 <div>
                     <Button value={"Send instructions"} onClick={sendInstruction}/>
                 </div>

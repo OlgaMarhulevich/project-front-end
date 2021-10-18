@@ -16,9 +16,9 @@ export const forgotPasswordAPI = {
     },
 
     setNewPassword(data: NewPasswordRequestType) {
-        return instanceLocal.post<NewPasswordRequestType,NewPasswordResponseType>('auth/set-new-password', {
+        return instanceLocal.post<NewPasswordRequestType, NewPasswordResponseType>('auth/set-new-password', {
             password: data.password,
-            resetPasswordToken:data.resetPasswordToken,
+            resetPasswordToken: data.resetPasswordToken,
         })
     }
 }
@@ -39,8 +39,14 @@ export type ForgotPasswordResponseType = {
     data:
         {
             info: string,
-            error: string,
+        },
+    Error: {
+        response: {
+            data: {
+                error: string
+            }
         }
+    }
 }
 
 //setNewPassword
@@ -53,8 +59,16 @@ export type NewPasswordRequestType = {
 export type NewPasswordResponseType = {
     data: {
         info: string,
-        error: string;
+        //уточнить приходит ли там error, при положиетльном ответе
+        error: string,
     },
-    status:number,
+    status: number,
+    Error: {
+        response: {
+            data: {
+                error: string
+            }
+        }
+    }
 }
 

@@ -8,6 +8,8 @@ type setPasswordStateType = {
     password: string,
     showModalWindow: boolean,
     status: number,
+    errorEmail: string,
+    errorPassword: string,
 }
 //2 объект
 let initialSetPasswordState: setPasswordStateType = {
@@ -15,6 +17,8 @@ let initialSetPasswordState: setPasswordStateType = {
     password: "",
     showModalWindow: false,
     status: 0,
+    errorEmail: "",
+    errorPassword: "",
 }
 //3 actions
 export const saveEmail = (email: string) => ({type: "SAVE_EMAIL", email} as const);
@@ -22,6 +26,8 @@ export const savePassword = (password: string) => ({type: "SAVE_PASSWORD", passw
 export const savePasswordStatusCode = (status: number) => ({type: "SAVE_PASSWORD_STATUS_CODE", status} as const);
 
 export const showModalWindow = (showModalWindow: boolean) => ({type: "SHOW_MODAL_WINDOW", showModalWindow} as const);
+export const showErrorEmail = (errorEmail: string) => ({type: "SHOW_ERROR_EMAIL", errorEmail} as const);
+export const showErrorPassword = (errorPassword: string) => ({type: "SHOW_ERROR_PASSWORD", errorPassword} as const);
 
 //4 reducer
 export const setPasswordReducer = (state = initialSetPasswordState, action: ActionSetPasswordReducerType): setPasswordStateType => {
@@ -35,6 +41,12 @@ export const setPasswordReducer = (state = initialSetPasswordState, action: Acti
         case "SHOW_MODAL_WINDOW": {
             return {...state, showModalWindow: action.showModalWindow}
         }
+        case "SHOW_ERROR_EMAIL": {
+            return {...state, errorEmail: action.errorEmail}
+        }
+        case "SHOW_ERROR_PASSWORD":{
+            return {...state,errorPassword:action.errorPassword}
+        }
         case "SAVE_PASSWORD_STATUS_CODE": {
             return {...state, status: action.status}
         }
@@ -44,10 +56,13 @@ export const setPasswordReducer = (state = initialSetPasswordState, action: Acti
 }
 
 //5 actionTypes
-export type ActionSetPasswordReducerType = ReturnType<typeof saveEmail>
+export type ActionSetPasswordReducerType =
+    | ReturnType<typeof saveEmail>
     | ReturnType<typeof showModalWindow>
     | ReturnType<typeof savePasswordStatusCode>
-    | ReturnType<typeof savePassword>;
+    | ReturnType<typeof savePassword>
+    | ReturnType<typeof showErrorEmail>
+    | ReturnType<typeof showErrorPassword>;
 
 //6 саночки
 
@@ -56,12 +71,15 @@ export const sendInstructionTC = (email: string, ghPagesAddress: string) => {
         forgotPasswordAPI.forgot({email, message: ghPagesAddress})
             .then((response) => {
                 debugger;
+                dispatch(showModalWindow(true));
+                dispatch(saveEmail(email));
                 console.log(response.data.info);
 
             })
-            .catch((response) => {
+            .catch(({...Error}) => {
                 debugger;
-                console.log(response.data.error)
+                console.log(Error.response.data.error)
+                dispatch(showErrorEmail(Error.response.data.error))
             })
     }
 }
@@ -73,13 +91,13 @@ export const createPasswordTC = (newPassword: string, token: string) => {
                 debugger
                 dispatch(savePasswordStatusCode(response.status));
                 dispatch(showModalWindow(false));
-                //подумать о реальной логике!
                 dispatch(savePassword(newPassword));
             })
-            .catch((response) => {
-                debugger;
-                console.log(response.data.error)
-            })
+            .catch(({...Error}) => {
+            debugger;
+            console.log(Error.response.data.error)
+            dispatch(showErrorPassword(Error.response.data.error))
+        })
     }
 }
 

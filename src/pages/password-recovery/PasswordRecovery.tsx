@@ -11,13 +11,13 @@ export const PasswordRecovery: React.FC = () => {
     const dispatch = useDispatch();
     const [password, setPassword] = useState<string>("");
 
+    const errorPasswordState = useSelector<AppStateType, string>(state => state.setPassword.errorPassword);
+
 
     const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.currentTarget.value);
     }
     const {token} = useParams<{ token: string }>();
-    const test = useParams();
-    console.log('test', test)
 
     const sendInstruction = () => {
         dispatch(createPasswordTC(password, token));
@@ -29,10 +29,17 @@ export const PasswordRecovery: React.FC = () => {
     }
     return (
         <div className={s.page}>
-            <div className={s.pageTitle}>Forgot your password?</div>
-            <div>
-                <p>Create new password</p>
-                <InputText label={"New password"} value={password} onChange={passwordHandler} type={"password"} name={"password"}/>
+            <div className={s.pageTitle}>Create new password</div>
+            <div className={s.mainBlock}>
+                <div className={s.input}>
+                    <InputText
+                        label={"New password"}
+                        value={password}
+                        onChange={passwordHandler}
+                        type={"password"}
+                        name={"password"}/>
+                    <p>{errorPasswordState}</p>
+                </div>
 
                 <div>
                     <Button value={"Send instructions"} onClick={sendInstruction}/>
