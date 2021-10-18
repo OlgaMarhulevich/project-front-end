@@ -6,12 +6,14 @@ import {createPasswordTC} from "../../bll/reducers/setPasswordReducer";
 import {AppStateType} from "../../bll/store";
 import {Button} from "../../common/components/button/Button";
 import {InputText} from "../../common/components/inputText/InputText";
+import {Preloader} from "../../common/components/preloader/Preloader";
 
 export const PasswordRecovery: React.FC = () => {
     const dispatch = useDispatch();
     const [password, setPassword] = useState<string>("");
 
     const errorPasswordState = useSelector<AppStateType, string>(state => state.setPassword.errorPassword);
+    const loadingState = useSelector<AppStateType, boolean>(state => state.setPassword.loading);
 
 
     const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +47,8 @@ export const PasswordRecovery: React.FC = () => {
                     <Button value={"Send instructions"} onClick={sendInstruction}/>
                 </div>
                 <p>Create new password and we will send you further instructions to email</p>
+                {loadingState && <Preloader/>}
+
             </div>
         </div>
     )

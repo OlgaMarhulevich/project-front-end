@@ -10,6 +10,7 @@ type setPasswordStateType = {
     status: number,
     errorEmail: string,
     errorPassword: string,
+    loading: boolean,
 }
 //2 объект
 let initialSetPasswordState: setPasswordStateType = {
@@ -19,6 +20,7 @@ let initialSetPasswordState: setPasswordStateType = {
     status: 0,
     errorEmail: "",
     errorPassword: "",
+    loading: false,
 }
 //3 actions
 export const saveEmail = (email: string) => ({type: "SAVE_EMAIL", email} as const);
@@ -28,6 +30,8 @@ export const savePasswordStatusCode = (status: number) => ({type: "SAVE_PASSWORD
 export const showModalWindow = (showModalWindow: boolean) => ({type: "SHOW_MODAL_WINDOW", showModalWindow} as const);
 export const showErrorEmail = (errorEmail: string) => ({type: "SHOW_ERROR_EMAIL", errorEmail} as const);
 export const showErrorPassword = (errorPassword: string) => ({type: "SHOW_ERROR_PASSWORD", errorPassword} as const);
+
+export const setLoading = (loading: boolean) => ({type: "SET_LOADING", loading} as const);
 
 //4 reducer
 export const setPasswordReducer = (state = initialSetPasswordState, action: ActionSetPasswordReducerType): setPasswordStateType => {
@@ -44,11 +48,14 @@ export const setPasswordReducer = (state = initialSetPasswordState, action: Acti
         case "SHOW_ERROR_EMAIL": {
             return {...state, errorEmail: action.errorEmail}
         }
-        case "SHOW_ERROR_PASSWORD":{
-            return {...state,errorPassword:action.errorPassword}
+        case "SHOW_ERROR_PASSWORD": {
+            return {...state, errorPassword: action.errorPassword}
         }
         case "SAVE_PASSWORD_STATUS_CODE": {
             return {...state, status: action.status}
+        }
+        case "SET_LOADING": {
+            return {...state, loading: action.loading}
         }
         default:
             return state;
@@ -62,12 +69,15 @@ export type ActionSetPasswordReducerType =
     | ReturnType<typeof savePasswordStatusCode>
     | ReturnType<typeof savePassword>
     | ReturnType<typeof showErrorEmail>
-    | ReturnType<typeof showErrorPassword>;
+    | ReturnType<typeof showErrorPassword>
+    | ReturnType<typeof setLoading>;
+
 
 //6 саночки
 
 export const sendInstructionTC = (email: string, ghPagesAddress: string) => {
     return (dispatch: Dispatch) => {
+        dispatch(setLoading(true));
         forgotPasswordAPI.forgot({email, message: ghPagesAddress})
             .then((response) => {
                 debugger;
@@ -81,11 +91,16 @@ export const sendInstructionTC = (email: string, ghPagesAddress: string) => {
                 console.log(Error.response.data.error)
                 dispatch(showErrorEmail(Error.response.data.error))
             })
+            .finally(() => {
+                dispatch(setLoading(false))
+            })
     }
 }
 
 export const createPasswordTC = (newPassword: string, token: string) => {
     return (dispatch: Dispatch) => {
+        dispatch(setLoading(true));
+
         forgotPasswordAPI.setNewPassword({password: newPassword, resetPasswordToken: token})
             .then((response) => {
                 debugger
@@ -94,10 +109,13 @@ export const createPasswordTC = (newPassword: string, token: string) => {
                 dispatch(savePassword(newPassword));
             })
             .catch(({...Error}) => {
-            debugger;
-            console.log(Error.response.data.error)
-            dispatch(showErrorPassword(Error.response.data.error))
-        })
+                debugger;
+                console.log(Error.response.data.error);
+                dispatch(showErrorPassword(Error.response.data.error));
+            })
+            .finally(() => {
+                dispatch(setLoading(false))
+            })
     }
 }
 

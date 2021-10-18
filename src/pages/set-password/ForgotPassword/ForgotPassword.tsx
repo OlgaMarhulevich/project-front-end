@@ -5,6 +5,7 @@ import s from "./ForgotPassword.module.scss";
 import {AppStateType} from "../../../bll/store";
 import {InputText} from "../../../common/components/inputText/InputText";
 import {Button} from "../../../common/components/button/Button";
+import {Preloader} from "../../../common/components/preloader/Preloader";
 
 export const ForgotPassword: React.FC = () => {
 
@@ -12,6 +13,7 @@ export const ForgotPassword: React.FC = () => {
 
     const emailState = useSelector<AppStateType, string>(state => state.setPassword.email);
     const errorEmailState = useSelector<AppStateType, string>(state => state.setPassword.errorEmail);
+    const loadingState = useSelector<AppStateType, boolean>(state => state.setPassword.loading);
 
     const [email, setEmail] = useState<string>(emailState);
 
@@ -44,6 +46,7 @@ export const ForgotPassword: React.FC = () => {
                 <p>Did you remember your password?</p>
                 {/*TODO нужна корреткная ссылка*/}
                 <a href={"http://localhost:3000/project-front-end#/login"}>Try logging in</a>
+                {loadingState &&  <Preloader/>}
             </div>
         </div>
     )
