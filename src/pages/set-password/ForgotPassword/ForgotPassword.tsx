@@ -7,6 +7,7 @@ import {InputText} from "../../../common/components/inputText/InputText";
 import {Button} from "../../../common/components/button/Button";
 import {Preloader} from "../../../common/components/preloader/Preloader";
 import { NavLink } from "react-router-dom";
+import {ROUTES} from "../../../app/routes/Routes";
 
 export const ForgotPassword: React.FC = () => {
 
@@ -45,7 +46,7 @@ export const ForgotPassword: React.FC = () => {
                     <Button value={"Send instructions"} onClick={sendInstruction}/>
                 </div>
                 <p>Did you remember your password?</p>
-                <NavLink to={'/login'}>Try to log in</NavLink>
+                <NavLink to={ROUTES.LOGIN}>Try to log in</NavLink>
                 {loadingState &&  <Preloader/>}
             </div>
         </div>

@@ -5,6 +5,7 @@ import React, {useCallback} from "react";
 import {Button} from "../button/Button";
 import styles from './logout.module.css'
 import {Redirect} from "react-router-dom";
+import {ROUTES} from "../../../app/routes/Routes";
 
 
 export const Logout = () => {
@@ -18,7 +19,7 @@ export const Logout = () => {
 
 
     if (!isLoggedIn) {
-        return <Redirect to={'/'}/>
+        return <Redirect to={ROUTES.HOME}/>
     }
 
     return (

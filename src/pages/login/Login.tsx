@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../bll/reducers/loginReducer";
 import {AppStateType} from "../../bll/store";
 import {NavLink, Redirect} from "react-router-dom";
+import {ROUTES} from "../../app/routes/Routes";
 
 
 export const Login: React.FC = () => {
@@ -21,7 +22,7 @@ export const Login: React.FC = () => {
     }
 
     if (isLoggedIn) {
-        return <Redirect to={'/Profile'}/>
+        return <Redirect to={ROUTES.PROFILE}/>
     }
 
     return (
@@ -36,13 +37,13 @@ export const Login: React.FC = () => {
             <Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.currentTarget.checked)}>Remember me</Checkbox>
 
             <div>
-                <NavLink to={'/'}><Button red value={'Cancel'} className={s.btn}/></NavLink>
+                <NavLink to={ROUTES.HOME}><Button red value={'Cancel'} className={s.btn}/></NavLink>
                 <Button value={'Log in'} onClick={loginHandler} className={s.btn}/>
             </div>
 
             <div>
-                <NavLink className={s.link} to={'/set-password'}>Forgot your password?</NavLink>
-                <NavLink className={s.link} to={'/registration'}>Sign up</NavLink>
+                <NavLink className={s.link} to={ROUTES.SET_PASSWORD}>Forgot your password?</NavLink>
+                <NavLink className={s.link} to={ROUTES.REGISTRATION}>Sign up</NavLink>
             </div>
         </div>
     )

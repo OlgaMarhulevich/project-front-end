@@ -6,6 +6,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import {register, setError, setIsRegistered} from "../../bll/reducers/registrationReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
+import {ROUTES} from "../../app/routes/Routes";
 
 export const Registration: React.FC = () => {
     const [email, setEmail] = useState('')
@@ -36,7 +37,7 @@ export const Registration: React.FC = () => {
     }
 
     if (isRegistered) {
-        return <Redirect to={'/profile'}/>
+        return <Redirect to={ROUTES.PROFILE}/>
     }
 
     return (
@@ -59,7 +60,7 @@ export const Registration: React.FC = () => {
                 className={s.input}/>
 
             <div>
-                <NavLink to={'/'}><Button red value={'Cancel'} className={s.btn}/></NavLink>
+                <NavLink to={ROUTES.HOME}><Button red value={'Cancel'} className={s.btn}/></NavLink>
                 <Button onClick={submit} value={'Register'}/>
             </div>
         </div>
