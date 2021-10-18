@@ -3,7 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {saveEmail, sendInstructionTC, showModalWindow} from "../../../bll/reducers/setPasswordReducer";
 import s from "./ForgotPassword.module.scss";
 import {AppStateType} from "../../../bll/store";
-import {Redirect} from "react-router-dom";
+import {InputText} from "../../../common/components/inputText/InputText";
+import {Button} from "../../../common/components/button/Button";
 
 export const ForgotPassword: React.FC = () => {
 
@@ -20,9 +21,9 @@ export const ForgotPassword: React.FC = () => {
 
     const sendInstruction = () => {
         dispatch(showModalWindow(true));
-        //путь должен быть другим!
-        //
-        email && dispatch(saveEmail(email)) && dispatch(sendInstructionTC(email,'http://localhost:3000/project-front-end#/password-recovery'));
+        dispatch(saveEmail(email));
+        //тут можно сделать красивей
+        dispatch(sendInstructionTC(email,'http://localhost:3000/project-front-end#/password-recovery'));
     }
 
     return (
@@ -30,12 +31,13 @@ export const ForgotPassword: React.FC = () => {
             <div className={s.pageTitle}>Forgot your password?</div>
             <div>
                 <p>Enter your email address and we will send you further instructions</p>
-                <input value={email} onChange={emailHandler} name={"Email"} type="text"/>
+                <InputText label={"Email"} value={email} onChange={emailHandler} type={"text"} name={"email"}/>
                 <div>
-                    <button onClick={sendInstruction}>Send instructions</button>
+                    <Button value={"Send instructions"} onClick={sendInstruction}/>
                 </div>
                 <p>Did you remember your password?</p>
-                <a href={"#"}>Try logging in</a>
+                {/*TODO нужна корреткная ссылка*/}
+                <a href={"http://localhost:3000/project-front-end#/login"}>Try logging in</a>
             </div>
         </div>
     )

@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {Redirect, useParams} from "react-router-dom";
 import {createPasswordTC} from "../../bll/reducers/setPasswordReducer";
 import {AppStateType} from "../../bll/store";
+import {Button} from "../../common/components/button/Button";
+import {InputText} from "../../common/components/inputText/InputText";
 
 export const PasswordRecovery: React.FC = () => {
     const dispatch = useDispatch();
@@ -30,9 +32,10 @@ export const PasswordRecovery: React.FC = () => {
             <div className={s.pageTitle}>Forgot your password?</div>
             <div>
                 <p>Create new password</p>
-                <input value={password} onChange={passwordHandler} name={"Password"} type="text"/>
+                <InputText label={"New password"} value={password} onChange={passwordHandler} type={"password"} name={"password"}/>
+
                 <div>
-                    <button onClick={sendInstruction}>Send instructions</button>
+                    <Button value={"Send instructions"} onClick={sendInstruction}/>
                 </div>
                 <p>Create new password and we will send you further instructions to email</p>
             </div>

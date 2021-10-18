@@ -18,9 +18,10 @@ let initialSetPasswordState: setPasswordStateType = {
 }
 //3 actions
 export const saveEmail = (email: string) => ({type: "SAVE_EMAIL", email} as const);
-export const createPassword = (password: string) => ({type: "CREATE_PASSWORD", password} as const);
+export const savePassword = (password: string) => ({type: "SAVE_PASSWORD", password} as const);
+export const savePasswordStatusCode = (status: number) => ({type: "SAVE_PASSWORD_STATUS_CODE", status} as const);
+
 export const showModalWindow = (showModalWindow: boolean) => ({type: "SHOW_MODAL_WINDOW", showModalWindow} as const);
-export const setPasswordStatusCode = (status: number) => ({type: "SET_PASSWORD_STATUS_CODE", status} as const);
 
 //4 reducer
 export const setPasswordReducer = (state = initialSetPasswordState, action: ActionSetPasswordReducerType): setPasswordStateType => {
@@ -28,13 +29,13 @@ export const setPasswordReducer = (state = initialSetPasswordState, action: Acti
         case "SAVE_EMAIL": {
             return {...state, email: action.email}
         }
+        case "SAVE_PASSWORD": {
+            return {...state, password: action.password}
+        }
         case "SHOW_MODAL_WINDOW": {
             return {...state, showModalWindow: action.showModalWindow}
         }
-        case "CREATE_PASSWORD": {
-            return {...state, password: action.password}
-        }
-        case "SET_PASSWORD_STATUS_CODE": {
+        case "SAVE_PASSWORD_STATUS_CODE": {
             return {...state, status: action.status}
         }
         default:
@@ -45,8 +46,8 @@ export const setPasswordReducer = (state = initialSetPasswordState, action: Acti
 //5 actionTypes
 export type ActionSetPasswordReducerType = ReturnType<typeof saveEmail>
     | ReturnType<typeof showModalWindow>
-    | ReturnType<typeof createPassword>
-    | ReturnType<typeof setPasswordStatusCode>;
+    | ReturnType<typeof savePasswordStatusCode>
+    | ReturnType<typeof savePassword>;
 
 //6 саночки
 
@@ -70,9 +71,14 @@ export const createPasswordTC = (newPassword: string, token: string) => {
         forgotPasswordAPI.setNewPassword({password: newPassword, resetPasswordToken: token})
             .then((response) => {
                 debugger
-                console.log(typeof response.status);
-                dispatch(setPasswordStatusCode(response.status));
-
+                dispatch(savePasswordStatusCode(response.status));
+                dispatch(showModalWindow(false));
+                //подумать о реальной логике!
+                dispatch(savePassword(newPassword));
+            })
+            .catch((response) => {
+                debugger;
+                console.log(response.data.error)
             })
     }
 }
