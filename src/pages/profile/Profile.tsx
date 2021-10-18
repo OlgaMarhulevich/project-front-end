@@ -6,7 +6,8 @@ import {AppStateType} from "../../bll/store";
 import {Redirect} from "react-router-dom";
 import {ROUTES} from "../../app/routes/Routes";
 import {Button} from "../../common/components/button/Button";
-import {logoutTC} from "../../bll/reducers/loginReducer";
+import { logoutTC } from "../../bll/reducers/profileReducer";
+import {Preloader} from "../../common/components/preloader/Preloader";
 
 export const Profile: React.FC = () => {
     const name = useSelector((state: AppStateType) => state.profile.name)
@@ -14,6 +15,7 @@ export const Profile: React.FC = () => {
     const avatar = useSelector((state: AppStateType) => state.profile.avatar)
 
     const isLoggedIn = useSelector((state: AppStateType) => state.login.isLoggedIn)
+    const isLoading = useSelector((state: AppStateType) => state.login.isLoading)
 
     const dispatch = useDispatch()
 
@@ -35,6 +37,8 @@ export const Profile: React.FC = () => {
                     <div><h3>Email: </h3><p>{email}</p></div>
                 </div>
             </div>
+
+            {isLoading && <Preloader/>}
         </div>
     )
 }

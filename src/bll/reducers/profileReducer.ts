@@ -3,7 +3,7 @@ import {authAPI} from "../../dal/LoginAPI";
 import {setIsLoggedInAC} from "./loginReducer";
 
 type initialProfileStateType = typeof initialProfileState
-let initialProfileState = {
+const initialProfileState = {
     email: '',
     name: '',
     avatar: '',
@@ -32,11 +32,10 @@ export const setLoadingAC = (value: boolean) => ({type: 'REGISTER-SET-LOADING', 
 
 //thunk
 export const authMe = () => (dispatch: Dispatch) => {
-    // dispatch(setLoadingAC(true))
-    debugger
+    dispatch(setLoadingAC(true))
+
     return authAPI.authMe()
         .then(res => {
-            debugger
             if (!res.data.error) {
                 dispatch(setNameAC(res.data.name))
                 dispatch(setNameAC(res.data.avatar || ''))
@@ -49,7 +48,24 @@ export const authMe = () => (dispatch: Dispatch) => {
         .catch((error) => {
             alert(error.response.data.error + ' ' + (error.response.data.passwordRegExp || ''))
         })
-        // .finally(() => dispatch(setLoadingAC(false)))
+        .finally(() => dispatch(setLoadingAC(false)))
+}
+
+export const logoutTC = () => (dispatch: Dispatch) => {
+    dispatch(setLoadingAC(true))
+
+    authAPI.logout()
+        .then((res) => {
+            if (!res.data.error) {
+                dispatch(setIsLoggedInAC(false))
+            }
+        })
+        .catch((error) => {
+            alert(error.response.data.error + ' ' + (error.response.data.passwordRegExp || ''))
+        })
+        .finally(() => {
+            dispatch(setLoadingAC(false))
+        })
 }
 
 export type ActionProfileReducerType =
