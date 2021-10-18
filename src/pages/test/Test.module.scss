@@ -3,8 +3,6 @@
   @include wrapper();
 
   .testBox {
-    margin: 50px auto;
-    width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;

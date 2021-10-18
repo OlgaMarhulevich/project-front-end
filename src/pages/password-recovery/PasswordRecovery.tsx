@@ -45,9 +45,10 @@ export const PasswordRecovery: React.FC = () => {
                 </div>
 
                 <div>
-                    <Button value={"Send instructions"} onClick={sendInstruction}/>
+                    <Button value={"Confirm new password"} onClick={sendInstruction}/>
                 </div>
                 <p>Create new password and we will send you further instructions to email</p>
+
                 {loadingState && <Preloader/>}
 
             </div>
