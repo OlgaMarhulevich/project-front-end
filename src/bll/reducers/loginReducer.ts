@@ -56,7 +56,6 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionLogi
                 ? err.response.data.error
                 : (err.message + `, more details in the console`);
             dispatch(signInErrorAC(error))
-            console.log('Error: ', {...err})
             const errData = JSON.stringify(err.response.data.error)
             alert(errData)
         })
@@ -84,9 +83,9 @@ export const logoutTC = () => (dispatch: Dispatch<ActionLoginReducerType>) => {
             // const errData = JSON.stringify(err.response.data.error)
             // alert(errData)
         })
-    // .finally(() => {
-    //     dispatch(setLogoutStatusAC('succeeded'))
-    // })
+        .finally(() => {
+            dispatch(setLogoutStatusAC('succeeded'))
+        })
 }
 
 //types
