@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store";
-import {logoutTC, RequestStatusType} from "../../../bll/reducers/loginReducer";
+import {logoutTC} from "../../../bll/reducers/loginReducer";
 import React, {useCallback} from "react";
 import {Button} from "../button/Button";
 import styles from './logout.module.css'
@@ -24,7 +24,7 @@ export const Logout = () => {
     return (
         <>
             {/*{status === 'loading' && 'preloader'}*/}
-            {isLoggedIn && <Button value={'logout'} onClick={logOutHandler} className={styles.logout}/>}
+            {isLoggedIn && <Button red value={'logout'} onClick={logOutHandler} className={styles.logout}/>}
         </>
     )
 }

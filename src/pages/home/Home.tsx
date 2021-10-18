@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 export const Home: React.FC = () => {
     return (
         <div className={s.page}>
-            <div className={s.pageTitle}>Home page</div>
+            <div className={s.pageTitle}>All pages</div>
 
             <NavLink to={'/test'}><Button value={'test'} className={s.btn}/></NavLink>
             <NavLink to={'/login'}><Button value={'login'} className={s.btn}/></NavLink>

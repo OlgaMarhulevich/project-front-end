@@ -6,6 +6,7 @@ import {AppStateType} from "../../../bll/store";
 import {InputText} from "../../../common/components/inputText/InputText";
 import {Button} from "../../../common/components/button/Button";
 import {Preloader} from "../../../common/components/preloader/Preloader";
+import { NavLink } from "react-router-dom";
 
 export const ForgotPassword: React.FC = () => {
 
@@ -44,8 +45,7 @@ export const ForgotPassword: React.FC = () => {
                     <Button value={"Send instructions"} onClick={sendInstruction}/>
                 </div>
                 <p>Did you remember your password?</p>
-                {/*TODO нужна корреткная ссылка*/}
-                <a href={"http://localhost:3000/project-front-end#/login"}>Try logging in</a>
+                <NavLink to={'/login'}>Try to log in</NavLink>
                 {loadingState &&  <Preloader/>}
             </div>
         </div>

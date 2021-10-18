@@ -14,7 +14,7 @@ type setPasswordStateType = {
 }
 //2 объект
 let initialSetPasswordState: setPasswordStateType = {
-    email: "kukoyaka",
+    email: "",
     password: "",
     showModalWindow: false,
     status: 0,
