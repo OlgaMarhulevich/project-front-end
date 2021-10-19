@@ -14,7 +14,7 @@ type setPasswordStateType = {
 }
 //2 объект
 let initialSetPasswordState: setPasswordStateType = {
-    email: "kukoyaka",
+    email: "",
     password: "",
     showModalWindow: false,
     status: 0,
@@ -23,38 +23,38 @@ let initialSetPasswordState: setPasswordStateType = {
     loading: false,
 }
 //3 actions
-export const saveEmail = (email: string) => ({type: "SAVE_EMAIL", email} as const);
-export const savePassword = (password: string) => ({type: "SAVE_PASSWORD", password} as const);
-export const savePasswordStatusCode = (status: number) => ({type: "SAVE_PASSWORD_STATUS_CODE", status} as const);
+export const saveEmail = (email: string) => ({type: "SET-PASSWORD/SAVE_EMAIL", email} as const);
+export const savePassword = (password: string) => ({type: "SET-PASSWORD/SAVE_PASSWORD", password} as const);
+export const savePasswordStatusCode = (status: number) => ({type: "SET-PASSWORD/SAVE_PASSWORD_STATUS_CODE", status} as const);
 
-export const showModalWindow = (showModalWindow: boolean) => ({type: "SHOW_MODAL_WINDOW", showModalWindow} as const);
-export const showErrorEmail = (errorEmail: string) => ({type: "SHOW_ERROR_EMAIL", errorEmail} as const);
-export const showErrorPassword = (errorPassword: string) => ({type: "SHOW_ERROR_PASSWORD", errorPassword} as const);
+export const showModalWindow = (showModalWindow: boolean) => ({type: "SET-PASSWORD/SHOW_MODAL_WINDOW", showModalWindow} as const);
+export const showErrorEmail = (errorEmail: string) => ({type: "SET-PASSWORD/SHOW_ERROR_EMAIL", errorEmail} as const);
+export const showErrorPassword = (errorPassword: string) => ({type: "SET-PASSWORD/SHOW_ERROR_PASSWORD", errorPassword} as const);
 
-export const setLoading = (loading: boolean) => ({type: "SET_LOADING", loading} as const);
+export const setLoading = (loading: boolean) => ({type: "SET-PASSWORD/SET_LOADING", loading} as const);
 
 //4 reducer
 export const setPasswordReducer = (state = initialSetPasswordState, action: ActionSetPasswordReducerType): setPasswordStateType => {
     switch (action.type) {
-        case "SAVE_EMAIL": {
+        case "SET-PASSWORD/SAVE_EMAIL": {
             return {...state, email: action.email}
         }
-        case "SAVE_PASSWORD": {
+        case "SET-PASSWORD/SAVE_PASSWORD": {
             return {...state, password: action.password}
         }
-        case "SHOW_MODAL_WINDOW": {
+        case "SET-PASSWORD/SHOW_MODAL_WINDOW": {
             return {...state, showModalWindow: action.showModalWindow}
         }
-        case "SHOW_ERROR_EMAIL": {
+        case "SET-PASSWORD/SHOW_ERROR_EMAIL": {
             return {...state, errorEmail: action.errorEmail}
         }
-        case "SHOW_ERROR_PASSWORD": {
+        case "SET-PASSWORD/SHOW_ERROR_PASSWORD": {
             return {...state, errorPassword: action.errorPassword}
         }
-        case "SAVE_PASSWORD_STATUS_CODE": {
+        case "SET-PASSWORD/SAVE_PASSWORD_STATUS_CODE": {
             return {...state, status: action.status}
         }
-        case "SET_LOADING": {
+        case "SET-PASSWORD/SET_LOADING": {
             return {...state, loading: action.loading}
         }
         default:

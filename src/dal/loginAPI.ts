@@ -12,8 +12,14 @@ export const authAPI = {
         return instance.post<LoginParamsType, { data: ProfileType }>('auth/login', data);
     },
     logout() {
-        return instance.delete('auth/me');
-    }
+        return instance.delete<{info: string, error?: string}>('auth/me');
+    },
+    authMe() {
+        return instance.post<{}, {data: ProfileType}>('auth/me', {})
+    },
+    updateMe(name: string, avatar: string) {
+        return instance.put<{name: string, avatar: string}, {data: {updatedUser: ProfileType, error?: string}}>('auth/me', {name, avatar})
+    },
 }
 
 // types

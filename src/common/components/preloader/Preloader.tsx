@@ -1,9 +1,6 @@
-import preloader from "../../assets/images/preloaderSasha.gif";
+import preloader from "../../assets/images/preloader.gif";
 import React from "react";
 
-
 export const Preloader: React.FC = () => {
-    return (<div>
-        <img src={preloader} alt=""/>
-    </div>)
+    return <img alt={'loading...'} style={{width: '100px', margin: '10px'}} src={preloader}/>
 }
