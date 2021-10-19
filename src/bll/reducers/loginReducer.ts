@@ -1,4 +1,4 @@
-import {authAPI, LoginParamsType} from "../../dal/LoginAPI";
+import {authAPI, LoginParamsType} from "../../dal/loginAPI";
 import {Dispatch} from "redux";
 import {setAvatarAC, setEmailAC, setNameAC} from "./profileReducer";
 

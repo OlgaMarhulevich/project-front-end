@@ -17,6 +17,9 @@ export const authAPI = {
     authMe() {
         return instance.post<{}, {data: ProfileType}>('auth/me', {})
     },
+    updateMe(name: string, avatar: string) {
+        return instance.put<{name: string, avatar: string}, {data: {updatedUser: ProfileType, error?: string}}>('auth/me', {name, avatar})
+    },
 }
 
 // types

@@ -45,7 +45,7 @@ export const PasswordRecovery: React.FC = () => {
                 <p style={{height: '1em', color: '#de2e2e'}}>{errorPasswordState}</p>
 
                 <div>
-                    <Button value={"Confirm new password"} onClick={sendInstruction}/>
+                    <Button disabled={loadingState} value={"Confirm new password"} onClick={sendInstruction}/>
                 </div>
 
                 {loadingState && <Preloader/>}

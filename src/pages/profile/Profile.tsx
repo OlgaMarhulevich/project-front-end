@@ -6,7 +6,7 @@ import {AppStateType} from "../../bll/store";
 import {Redirect} from "react-router-dom";
 import {ROUTES} from "../../app/routes/Routes";
 import {Button} from "../../common/components/button/Button";
-import { logoutTC } from "../../bll/reducers/profileReducer";
+import {logoutTC} from "../../bll/reducers/profileReducer";
 import {Preloader} from "../../common/components/preloader/Preloader";
 
 export const Profile: React.FC = () => {

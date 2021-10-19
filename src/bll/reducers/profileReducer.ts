@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../../dal/LoginAPI";
+import {authAPI} from "../../dal/loginAPI";
 import {setIsLoggedInAC} from "./loginReducer";
+import {setIsRegistered} from "./registrationReducer";
 
 type initialProfileStateType = typeof initialProfileState
 const initialProfileState = {
@@ -31,25 +32,47 @@ export const setAvatarAC = (value: string) => ({type: "PROFILE/SET-AVATAR", valu
 export const setLoadingAC = (value: boolean) => ({type: 'REGISTER-SET-LOADING', value} as const)
 
 //thunk
-export const authMe = () => (dispatch: Dispatch) => {
-    dispatch(setLoadingAC(true))
-
-    return authAPI.authMe()
-        .then(res => {
-            if (!res.data.error) {
-                dispatch(setNameAC(res.data.name))
-                dispatch(setNameAC(res.data.avatar || ''))
-                dispatch(setEmailAC(res.data.email))
-                dispatch(setIsLoggedInAC(true))
-            } else {
-
-            }
-        })
-        .catch((error) => {
-            alert(error.response.data.error + ' ' + (error.response.data.passwordRegExp || ''))
-        })
-        .finally(() => dispatch(setLoadingAC(false)))
-}
+// export const authMe = () => (dispatch: Dispatch) => {
+//     dispatch(setLoadingAC(true))
+//
+//     authAPI.authMe()
+//         .then(res => {
+//             if (!res.data.error) {
+//                 dispatch(setNameAC(res.data.name))
+//                 dispatch(setNameAC(res.data.avatar || ''))
+//                 dispatch(setEmailAC(res.data.email))
+//                 dispatch(setIsLoggedInAC(true))
+//             } else {
+//
+//             }
+//         })
+//         .catch((error) => {
+//             alert(error.response.data.error + ' ' + (error.response.data.passwordRegExp || ''))
+//         })
+//         .finally(() => {
+//             dispatch(setLoadingAC(false))
+//         })
+// }
+//
+// export const updateMe = (name: string, avatar: string) => (dispatch: Dispatch) => {
+//     dispatch(setLoadingAC(true))
+//
+//     authAPI.updateMe(name, avatar)
+//         .then(res => {
+//             if (!res.data.error) {
+//                 console.log(res.data)
+//                 dispatch(setIsLoggedInAC(true))
+//             } else {
+//
+//             }
+//         })
+//         .catch((error) => {
+//             alert(error.response.data.error + ' ' + (error.response.data.passwordRegExp || ''))
+//         })
+//         .finally(() => {
+//             dispatch(setLoadingAC(false))
+//         })
+// }
 
 export const logoutTC = () => (dispatch: Dispatch) => {
     dispatch(setLoadingAC(true))
@@ -58,6 +81,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
         .then((res) => {
             if (!res.data.error) {
                 dispatch(setIsLoggedInAC(false))
+                dispatch(setIsRegistered(false))
             }
         })
         .catch((error) => {
@@ -74,5 +98,6 @@ export type ActionProfileReducerType =
     | ReturnType<typeof setAvatarAC>
     | ReturnType<typeof setLoadingAC>
     | ReturnType<typeof setIsLoggedInAC>
+    | ReturnType<typeof setIsRegistered>
 
 export default profileReducer;

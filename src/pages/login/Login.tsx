@@ -43,8 +43,8 @@ export const Login: React.FC = () => {
             <Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.currentTarget.checked)}>Remember me</Checkbox>
 
             <div>
-                <NavLink to={ROUTES.HOME}><Button red value={'Cancel'} className={s.btn}/></NavLink>
-                <Button value={'Log in'} onClick={loginHandler} className={s.btn}/>
+                <NavLink to={ROUTES.HOME}><Button disabled={isLoading} red value={'Cancel'} className={s.btn}/></NavLink>
+                <Button disabled={isLoading} value={'Log in'} onClick={loginHandler} className={s.btn}/>
             </div>
 
             <div>

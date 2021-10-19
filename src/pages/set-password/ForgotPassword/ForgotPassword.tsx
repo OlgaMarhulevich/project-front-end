@@ -43,7 +43,7 @@ export const ForgotPassword: React.FC = () => {
                 </div>
                 <p style={{height: '1em', color: '#de2e2e'}}>{errorEmailState}</p>
                 <div>
-                    <Button value={"Send instructions"} onClick={sendInstruction}/>
+                    <Button disabled={loadingState} value={"Send instructions"} onClick={sendInstruction}/>
                 </div>
                 <p>Did you remember your password?</p>
                 <NavLink to={ROUTES.LOGIN}>Try to log in</NavLink>
