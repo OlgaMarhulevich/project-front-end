@@ -17,6 +17,7 @@ export const Profile: React.FC = () => {
 
     const isLoggedIn = useSelector((state: AppStateType) => state.login.isLoggedIn)
     const isLoading = useSelector((state: AppStateType) => state.login.isLoading)
+    const error = useSelector((state: AppStateType) => state.profile.error)
 
     const dispatch = useDispatch()
 
@@ -26,14 +27,25 @@ export const Profile: React.FC = () => {
         return <Redirect to={ROUTES.LOGIN}/>
     }
 
+    const changeAvatar = () => {
+        const newAvatar = prompt('Enter here link to new avatar:')
+        dispatch(updateMe(name, (newAvatar || '')))
+    }
+
     return (
         <div className={s.page}>
             <div className={s.pageTitle}>Profile</div>
+
+            <div className={s.error}>{error}</div>
+
             <div className={s.logout}>
-                {isLoggedIn && <Button red value={'logout'} onClick={() => dispatch(logoutTC())}/>}
+                {isLoggedIn && <Button disabled={isLoading} red value={'logout'} onClick={() => dispatch(logoutTC())}/>}
             </div>
             <div className={s.profile}>
-                <img className={s.img} src={avatar || unknown} alt="avatar"/>
+                <div className={s.imgBox}>
+                    <img className={s.img} src={avatar || unknown} alt="avatar"/>
+                    <Button disabled={isLoading} className={s.changeBtn} value={'Change avatar'} onClick={changeAvatar}/>
+                </div>
 
                 <div className={s.description}>
                     <div><h3>Name: </h3>

@@ -50,9 +50,8 @@ export const authMe = () => (dispatch: Dispatch) => {
                 dispatch(setError(res.data.error))
             }
         })
-        .catch(() => {
-            // if not authorized
-            //alert(error.response.data.error + ' ' + (error.response.data.passwordRegExp || ''))
+        .catch((error) => {
+            dispatch(setError(error.response.data.error + ' ' + (error.response.data.passwordRegExp || '')))
         })
         .finally(() => {
             dispatch(setLoadingAC(false))
@@ -65,9 +64,9 @@ export const updateMe = (name: string, avatar: string) => (dispatch: Dispatch) =
     authAPI.updateMe(name, avatar)
         .then(res => {
             if (!res.data.error) {
-
+                dispatch(setAvatarAC(res.data.updatedUser.avatar || ''))
             } else {
-
+                dispatch(setError(res.data.error))
             }
         })
         .catch((error) => {
