@@ -32,34 +32,42 @@ export const Profile: React.FC = () => {
         dispatch(updateMe(name, (newAvatar || '')))
     }
 
-    return (
-        <div className={s.page}>
-            <div className={s.pageTitle}>Profile</div>
+    return (<>
+            {!nameFromProp
+                ?
+                <Preloader/>
+                :
+                <div className={s.page}>
+                    <div className={s.pageTitle}>Profile</div>
 
-            <div className={s.error}>{error}</div>
+                    <div className={s.error}>{error}</div>
 
-            <div className={s.logout}>
-                {isLoggedIn && <Button disabled={isLoading} red value={'logout'} onClick={() => dispatch(logoutTC())}/>}
-            </div>
-            <div className={s.profile}>
-                <div className={s.imgBox}>
-                    <img className={s.img} src={avatar || unknown} alt="avatar"/>
-                    <Button disabled={isLoading} className={s.changeBtn} value={'Change avatar'} onClick={changeAvatar}/>
-                </div>
-
-                <div className={s.description}>
-                    <div><h3>Name: </h3>
-                        <EditableSpan
-                            value={name}
-                            onChangeText={setName}
-                            onBlur={() => dispatch(updateMe(name, avatar))}
-                            onEnter={() => dispatch(updateMe(name, avatar))}/>
+                    <div className={s.logout}>
+                        {isLoggedIn &&
+                        <Button disabled={isLoading} red value={'logout'} onClick={() => dispatch(logoutTC())}/>}
                     </div>
-                    <div><h3>Email: </h3><p>{email}</p></div>
-                </div>
-            </div>
+                    <div className={s.profile}>
+                        <div className={s.imgBox}>
+                            <img className={s.img} src={avatar || unknown} alt="avatar"/>
+                            <Button disabled={isLoading} className={s.changeBtn} value={'Change avatar'}
+                                    onClick={changeAvatar}/>
+                        </div>
 
-            {isLoading && <Preloader/>}
-        </div>
+                        <div className={s.description}>
+                            <div><h3>Name: </h3>
+                                <EditableSpan
+                                    value={name}
+                                    onChangeText={setName}
+                                    onBlur={() => dispatch(updateMe(name, avatar))}
+                                    onEnter={() => dispatch(updateMe(name, avatar))}/>
+                            </div>
+                            <div><h3>Email: </h3><p>{email}</p></div>
+                        </div>
+                    </div>
+
+                    {isLoading && <Preloader/>}
+                </div>
+            }
+        </>
     )
 }

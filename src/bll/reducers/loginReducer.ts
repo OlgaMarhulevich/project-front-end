@@ -50,7 +50,6 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionLogi
             dispatch(setNameAC(res.data.name))
         })
         .catch((err) => {
-            debugger
             const error = err.response
                 ? err.response.data.error
                 : (err.message + `, more details in the console`);

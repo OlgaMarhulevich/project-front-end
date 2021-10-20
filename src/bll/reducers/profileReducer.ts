@@ -88,7 +88,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
             }
         })
         .catch((error) => {
-            alert(error.response.data.error + ' ' + (error.response.data.passwordRegExp || ''))
+            dispatch(setError(error.response.data.error + ' ' + (error.response.data.passwordRegExp || '')))
         })
         .finally(() => {
             dispatch(setLoadingAC(false))

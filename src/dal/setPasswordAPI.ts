@@ -3,9 +3,9 @@ import axios from "axios";
 const instanceHeroku = axios.create({
     baseURL: "https://neko-back.herokuapp.com/2.0/",
 })
-const instanceLocal = axios.create({
-    baseURL: "http://localhost:7542/2.0/",
-})
+// const instanceLocal = axios.create({
+//     baseURL: "http://localhost:7542/2.0/",
+// })
 export const forgotPasswordAPI = {
     forgot(data: ForgotPasswordType) {
         return instanceHeroku.post<ForgotPasswordType, ForgotPasswordResponseType>('auth/forgot', {
@@ -16,7 +16,7 @@ export const forgotPasswordAPI = {
     },
 
     setNewPassword(data: NewPasswordRequestType) {
-        return instanceLocal.post<NewPasswordRequestType, NewPasswordResponseType>('auth/set-new-password', {
+        return instanceHeroku.post<NewPasswordRequestType, NewPasswordResponseType>('auth/set-new-password', {
             password: data.password,
             resetPasswordToken: data.resetPasswordToken,
         })
