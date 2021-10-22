@@ -47,11 +47,11 @@ export const authMe = () => (dispatch: Dispatch) => {
                 dispatch(setEmailAC(res.data.email))
                 dispatch(setIsLoggedInAC(true))
             } else {
-                dispatch(setError(res.data.error))
+                //dispatch(setError(res.data.error))
             }
         })
         .catch((error) => {
-            dispatch(setError(error.response.data.error + ' ' + (error.response.data.passwordRegExp || '')))
+            //dispatch(setError(error.response.data.error + ' ' + (error.response.data.passwordRegExp || '')))
         })
         .finally(() => {
             dispatch(setLoadingAC(false))
