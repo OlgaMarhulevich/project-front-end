@@ -12,8 +12,8 @@ import {Preloader} from "../../common/components/preloader/Preloader";
 
 
 export const Login: React.FC = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('omarhulevich@yandex.by')
+    const [password, setPassword] = useState('123123123')
     const [rememberMe, setRememberMe] = useState(false)
 
     const isLoggedIn = useSelector<AppStateType>(state => state.login.isLoggedIn)
